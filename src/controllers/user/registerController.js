@@ -7,10 +7,12 @@ const registerController = async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
+
     await user.save();
-    res.status(201).send(user);
+    const token = await user.generateAuthToken();
+    res.status(201).send({ user, token });
   } catch (e) {
-    res.status(500).send();
+    res.status(500).send(e);
   }
 };
 
