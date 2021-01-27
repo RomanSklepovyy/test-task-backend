@@ -9,7 +9,7 @@ const getOrderController = async (req, res) => {
     }
     res.status(200).send(order);
   } catch (e) {
-    res.status(500).send(e);
+    res.status(500).send();
   }
 };
 

@@ -5,7 +5,7 @@ const getOrdersController = async (req, res) => {
     const orders = await Order.find();
     res.status(200).send(orders);
   } catch (e) {
-    res.status(500).send(e.message);
+    res.status(500).send();
   }
 };
 

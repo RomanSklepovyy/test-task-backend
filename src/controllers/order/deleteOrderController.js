@@ -9,7 +9,7 @@ const deleteOrderController = async (req, res) => {
     }
     res.status(200).send(deletedOrder);
   } catch (e) {
-    res.status(500).send(e.message);
+    res.status(500).send();
   }
 };
 
