@@ -1,6 +1,9 @@
-const getOrdersController = (req, res) => {
+const Order = require('../../models/order');
+
+const getOrdersController = async (req, res) => {
   try {
-    res.status(200).send();
+    const orders = await Order.find();
+    res.status(200).send(orders);
   } catch (e) {
     res.status(500).send(e.message);
   }

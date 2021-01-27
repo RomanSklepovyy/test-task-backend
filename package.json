@@ -15,7 +15,9 @@
     }
   },
   "lint-staged": {
-    "*.(js|jsx)": ["npm run lint:write"]
+    "*.(js|jsx)": [
+      "npm run lint:write"
+    ]
   },
   "keywords": [],
   "author": "",
