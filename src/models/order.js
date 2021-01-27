@@ -53,7 +53,7 @@ const addressSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-});
+}, { _id: false });
 
 const lineItemSchema = new mongoose.Schema({
   quantity: {
@@ -78,7 +78,7 @@ const lineItemSchema = new mongoose.Schema({
   discount: {
     type: Number,
   },
-});
+}, { _id: false });
 
 const orderSchema = new mongoose.Schema({
   userId: {
