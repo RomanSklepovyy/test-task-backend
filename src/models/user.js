@@ -20,6 +20,9 @@ const userSchema = new mongoose.Schema({
     minlength: 7,
     trim: true,
   },
+  orders: [
+    { type: mongoose.Schema.Types.ObjectId, ref: 'Order' },
+  ],
   tokens: [{
     token: {
       type: String,
@@ -33,12 +36,6 @@ const userSchema = new mongoose.Schema({
     },
   }],
 }, { timestamps: true });
-
-userSchema.virtual('orders', {
-  ref: 'Order',
-  localField: '_id',
-  foreignField: 'owner',
-});
 
 userSchema.methods.generateAuthToken = async function () {
   const { _id } = this;

@@ -3,7 +3,7 @@ const Order = require('../../models/order');
 const createOrderController = async (req, res) => {
   try {
     const { _id } = req.user;
-    const order = new Order({ ...req.body, owner: _id });
+    const order = new Order({ ...req.body, userId: _id });
     await order.save();
     res.status(201).send(order);
   } catch (e) {

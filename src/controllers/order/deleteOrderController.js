@@ -3,7 +3,7 @@ const Order = require('../../models/order');
 const deleteOrderController = async (req, res) => {
   try {
     const { _id } = req.user;
-    const deletedOrder = await Order.findOneAndDelete({ _id: req.params.id, owner: _id });
+    const deletedOrder = await Order.findOneAndDelete({ _id: req.params.id, userId: _id });
     if (!deletedOrder) {
       res.status(404).send();
       return;

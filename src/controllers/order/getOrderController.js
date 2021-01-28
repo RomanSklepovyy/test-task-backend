@@ -3,7 +3,7 @@ const Order = require('../../models/order');
 const getOrderController = async (req, res) => {
   try {
     const { _id } = req.user;
-    const order = await Order.findOne({ _id: req.params.id, owner: _id });
+    const order = await Order.findOne({ _id: req.params.id, userId: _id });
     if (!order) {
       res.status(404).send();
       return;
