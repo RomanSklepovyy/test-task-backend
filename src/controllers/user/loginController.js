@@ -8,7 +8,8 @@ const loginController = async (req, res) => {
       return;
     }
     const token = await user.generateAuthToken();
-    res.status(200).send({ user, token });
+    const refreshToken = await user.generateRefreshToken();
+    res.status(200).send({ user, token, refreshToken });
   } catch (e) {
     res.status(500).send();
   }

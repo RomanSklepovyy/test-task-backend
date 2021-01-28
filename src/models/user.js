@@ -26,6 +26,12 @@ const userSchema = new mongoose.Schema({
       required: true,
     },
   }],
+  refreshTokens: [{
+    token: {
+      type: String,
+      required: true,
+    },
+  }],
 }, { timestamps: true });
 
 userSchema.virtual('orders', {
@@ -36,29 +42,28 @@ userSchema.virtual('orders', {
 
 userSchema.methods.generateAuthToken = async function () {
   const { _id } = this;
-  const token = jwt.sign({ _id: _id.toString() },
+  const token = jwt.sign(
+    { _id: _id.toString() },
     process.env.JWT_SECRET,
-    {
-      expiresIn: '10m',
-    });
+    { expiresIn: '8h' },
+  );
   this.tokens = this.tokens.concat({ token });
   await this.save();
 
   return token;
 };
 
-// userSchema.methods.generateRefreshToken = async function () {
-//   const { _id } = this;
-//   const token = jwt.sign({ _id: _id.toString() },
-//     process.env.JWT_REFRESH_TOKEN,
-//     {
-//       expiresIn: '10m',
-//     });
-//   this.tokens = this.tokens.concat({ token });
-//   await this.save();
-//
-//   return token;
-// };
+userSchema.methods.generateRefreshToken = async function () {
+  const { _id } = this;
+  const refreshedToken = jwt.sign(
+    { _id: _id.toString() },
+    process.env.JWT_REFRESH_TOKEN,
+  );
+  this.refreshTokens = this.refreshTokens.concat({ token: refreshedToken });
+  await this.save();
+
+  return refreshedToken;
+};
 
 userSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
@@ -72,6 +77,7 @@ userSchema.methods.toJSON = function () {
 
   delete userObject.password;
   delete userObject.tokens;
+  delete userObject.refreshTokens;
 
   return userObject;
 };

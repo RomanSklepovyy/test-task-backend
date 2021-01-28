@@ -2,7 +2,9 @@ const Order = require('../../models/order');
 
 const updateOrderController = async (req, res) => {
   try {
-    const order = await Order.findByIdAndUpdate(req.params.id, { ...req.body });
+    const order = await Order.findByIdAndUpdate(req.params.id,
+      { ...req.body },
+      { useFindAndModify: false });
     if (!order) {
       res.status(404).send();
       return;
