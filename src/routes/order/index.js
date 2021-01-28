@@ -12,7 +12,7 @@ const updateOrderValidator = require('./validators/updateOrderValidator');
 
 const router = new express.Router();
 
-router.get('/orders', getOrdersController);
+router.get('/orders', auth, getOrdersController);
 
 router.get('/orders/:id', auth, celebrate(idOrderValidator), getOrderController);
 

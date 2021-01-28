@@ -2,7 +2,8 @@ const Order = require('../../models/order');
 
 const getOrdersController = async (req, res) => {
   try {
-    const orders = await Order.find();
+    const { _id } = req.user;
+    const orders = await Order.find({ owner: _id });
     res.status(200).send(orders);
   } catch (e) {
     res.status(500).send();
