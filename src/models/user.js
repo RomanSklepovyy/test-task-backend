@@ -35,13 +35,30 @@ userSchema.virtual('orders', {
 });
 
 userSchema.methods.generateAuthToken = async function () {
-  // eslint-disable-next-line no-underscore-dangle
-  const token = jwt.sign({ _id: this._id.toString() }, process.env.JWT_SECRET);
+  const { _id } = this;
+  const token = jwt.sign({ _id: _id.toString() },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: '10m',
+    });
   this.tokens = this.tokens.concat({ token });
   await this.save();
 
   return token;
 };
+
+// userSchema.methods.generateRefreshToken = async function () {
+//   const { _id } = this;
+//   const token = jwt.sign({ _id: _id.toString() },
+//     process.env.JWT_REFRESH_TOKEN,
+//     {
+//       expiresIn: '10m',
+//     });
+//   this.tokens = this.tokens.concat({ token });
+//   await this.save();
+//
+//   return token;
+// };
 
 userSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
