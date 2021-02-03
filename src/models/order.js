@@ -78,6 +78,9 @@ const lineItemSchema = new mongoose.Schema({
   discount: {
     type: Number,
   },
+  description: {
+    type: String,
+  },
 }, { _id: false });
 
 const orderSchema = new mongoose.Schema({

@@ -20,6 +20,7 @@ const lineItemSchema = {
   unitPrice: Joi.number().min(0).required(),
   shippingPrice: Joi.number().min(0).required(),
   discount: Joi.number().min(0),
+  description: Joi.string(),
 };
 
 const orderSchema = {
