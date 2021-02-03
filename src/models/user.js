@@ -17,12 +17,8 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minlength: 7,
     trim: true,
   },
-  orders: [
-    { type: mongoose.Schema.Types.ObjectId, ref: 'Order' },
-  ],
   tokens: [{
     token: {
       type: String,

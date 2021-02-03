@@ -7,7 +7,7 @@ const updateOrderController = async (req, res) => {
     const order = await Order.findOneAndUpdate(
       { _id: req.params.id, userId: _id },
       { ...req.body },
-      { useFindAndModify: false },
+      { useFindAndModify: false, new: true },
     );
 
     if (!order) {

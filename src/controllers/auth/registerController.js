@@ -2,11 +2,8 @@ const User = require('../../models/user');
 
 const registerController = async (req, res) => {
   try {
-    const user = new User({
-      fullName: req.body.fullName,
-      email: req.body.email,
-      password: req.body.password,
-    });
+    const { fullName, email, password } = req.body;
+    const user = new User({ fullName, email, password });
 
     await user.save();
     const token = await user.generateAuthToken();
