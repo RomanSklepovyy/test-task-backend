@@ -25,7 +25,6 @@ const lineItemSchema = {
 
 const orderSchema = {
   [Segments.BODY]: Joi.object().keys({
-    userId: Joi.string().required(),
     status: Joi.string().required(),
     description: Joi.string().required(),
     orderedBy: Joi.object(addressSchema).required(),
