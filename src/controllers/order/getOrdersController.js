@@ -16,7 +16,8 @@ const getOrdersController = async (req, res) => {
       skip: parseInt(skip, 10),
       sort,
     });
-    res.status(200).send({ orders });
+    const count = await Order.count({ userId: _id });
+    res.status(200).send({ orders, count });
   } catch (e) {
     res.status(500).send();
   }
