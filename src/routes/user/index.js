@@ -6,6 +6,6 @@ const getUserController = require('../../controllers/user/getUserController');
 
 const router = new express.Router();
 
-router.get('/users/', celebrate(authValidatorSchema), auth, getUserController);
+router.get('/users', celebrate(authValidatorSchema), auth, getUserController);
 
 module.exports = router;

@@ -8,7 +8,7 @@ const addressSchema = {
   address3: Joi.string(),
   city: Joi.string(),
   state: Joi.string(),
-  zip: Joi.string(),
+  zip: Joi.number(),
   country: Joi.string(),
   phone: Joi.number(),
   email: Joi.string().email(),

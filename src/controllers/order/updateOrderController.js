@@ -11,7 +11,7 @@ const updateOrderController = async (req, res) => {
     );
 
     if (!order) {
-      res.status(404).send();
+      res.status(404).send({ error: { statusCode: 404, message: 'Error not found!' } });
       return;
     }
 
