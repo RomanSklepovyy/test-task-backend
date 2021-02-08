@@ -10,17 +10,53 @@ const createOrderValidator = require('./validators/createOrderValidator');
 const idOrderValidator = require('./validators/idOrderValidator');
 const updateOrderValidator = require('./validators/updateOrderValidator');
 const authValidatorSchema = require('../../utils/authValidatorSchema');
+const deleteOrdersController = require('../../controllers/order/deleteOrdersController');
 
 const router = new express.Router();
 
-router.get('/orders', celebrate(authValidatorSchema), auth, getOrdersController);
+router.get(
+  '/orders',
+  celebrate(authValidatorSchema),
+  auth,
+  getOrdersController,
+);
 
-router.get('/orders/:id', celebrate(authValidatorSchema), auth, celebrate(idOrderValidator), getOrderController);
+router.get(
+  '/orders/:id',
+  celebrate(authValidatorSchema),
+  auth,
+  celebrate(idOrderValidator),
+  getOrderController,
+);
 
-router.post('/orders', celebrate(authValidatorSchema), auth, celebrate(createOrderValidator), createOrderController);
+router.post(
+  '/orders',
+  celebrate(authValidatorSchema),
+  auth,
+  celebrate(createOrderValidator),
+  createOrderController,
+);
 
-router.put('/orders/:id', celebrate(authValidatorSchema), auth, celebrate(updateOrderValidator), updateOrderController);
+router.put(
+  '/orders/:id',
+  celebrate(authValidatorSchema),
+  auth,
+  celebrate(updateOrderValidator),
+  updateOrderController,
+);
 
-router.delete('/orders/:id', celebrate(authValidatorSchema), auth, celebrate(idOrderValidator), deleteOrderController);
+router.delete(
+  '/orders/:id',
+  celebrate(authValidatorSchema),
+  auth,
+  celebrate(idOrderValidator),
+  deleteOrderController,
+);
+
+router.delete(
+  '/orders',
+  auth,
+  deleteOrdersController,
+);
 
 module.exports = router;

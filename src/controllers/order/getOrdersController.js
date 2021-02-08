@@ -8,7 +8,7 @@ const getOrdersController = async (req, res) => {
 
     if (req.query.sortBy) {
       const parts = req.query.sortBy.split(':');
-      sort[parts[0]] = parts[1] === 'desc' ? -1 : 1;
+      sort[parts[0]] = parts[1] === 'descend' ? -1 : 1;
     }
     const { _id } = req.user;
     const orders = await Order.find({ userId: _id }, null, {
